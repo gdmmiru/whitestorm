@@ -1,3 +1,17 @@
+#########################################################################################
+# pd_options_example
+# gdmmiru
+# this script shows how to grab options data through pandas (sourced from yahoo) and
+# how to do some basic filtering based on the data (eg Last, Vol, Open_Int)
+# It also shows how to filter on Strike, (or any other field in the index), which is
+# one of the many levels inside of the index
+# Filtering based on index is much easier if we treat the the levels as a column of the
+# row, which is done by calling reset_index, there is an example of this at the end
+#
+# TODO: add more complicated filtering examples;
+#       more selection, filtering on the dataframe;
+#########################################################################################
+
 from pandas.io.data import Options
 
 
@@ -73,18 +87,30 @@ print_header()
 # the index is a multilevel field, which we can access through levels
 # Strike is the first index of the levels
 itm_fm_puts = fm[fm.index.levels[0] > options.underlying_price]
-print "itm front month puts"
+print "ITM FRONT MONTH PUTS"
 print "count:", len(itm_fm_puts)
 print itm_fm_puts.head()
 
+print_header()
 # reindexed dataframe(all levels in index become a col)
 ri_fm = fm.reset_index()
 ri_itm_fm_puts = ri_fm[ri_fm.Strike > options.underlying_price]
-print "itm front month puts"
+print "ITM FRONT MONTH PUTS FROM RESET_INDEX"
 print "count:", len(ri_itm_fm_puts)
 print ri_itm_fm_puts.head()
 
 
+
+print_header()
+print "ITERATE EACH ROW OF DF"
+# iterate through the rows
+rows_printed = 0
+for idx,row in fm.iterrows():
+    if rows_printed < 2:
+        print row
+    else:
+        break;
+    rows_printed += 1
 
 
 
