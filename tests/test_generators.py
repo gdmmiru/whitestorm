@@ -11,3 +11,16 @@ def get_evens(max_num):
 # call function with an upper limit
 for val in get_evens(10):
     print val
+
+
+# another way to call generators, keep calling until StopIteration
+# exception is thrown
+fp = get_evens(5)
+try:
+    while True:
+        print next(fp)
+
+except StopIteration as e:
+    print e
+
+print "done"
