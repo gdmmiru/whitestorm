@@ -1,6 +1,5 @@
 #########################################################################################
 # pd_options_example
-# gdmmiru
 # this script shows how to grab options data through pandas (sourced from yahoo) and
 # how to do some basic filtering based on the data (eg Last, Vol, Open_Int)
 # It also shows how to filter on Strike, (or any other field in the index), which is
@@ -12,8 +11,8 @@
 #       more selection, filtering on the dataframe;
 #########################################################################################
 
-from pandas.io.data import Options
-
+#from pandas.io.data import Options
+from pandas_datareader import data, wb, Options
 
 import datetime
 import sys
@@ -86,10 +85,10 @@ print active_fm_puts_or_oi.head()
 print_header()
 # the index is a multilevel field, which we can access through levels
 # Strike is the first index of the levels
-itm_fm_puts = fm[fm.index.levels[0] > options.underlying_price]
-print "ITM FRONT MONTH PUTS"
-print "count:", len(itm_fm_puts)
-print itm_fm_puts.head()
+#itm_fm_puts = fm[fm.index.levels[0] > options.underlying_price]
+#print "ITM FRONT MONTH PUTS"
+#print "count:", len(itm_fm_puts)
+#print itm_fm_puts.head()
 
 print_header()
 # reindexed dataframe(all levels in index become a col)

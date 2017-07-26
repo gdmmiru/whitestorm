@@ -1,7 +1,8 @@
 import pandas as pd
 import datetime
 import os.path
-from pandas.io.data import Options
+#from pandas.io.data import Options
+from pandas_datareader import data, wb, Options
 import sys
 today = datetime.datetime.now().date().isoformat().replace('-', '')
 
